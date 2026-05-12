@@ -1,28 +1,28 @@
-# Descripcion tecnica
+# Technical Overview
 
-## Problema
+## Problem
 
-Pronosticar acumulados de lluvia exige combinar modelos con fortalezas distintas. Los modelos fisicos representan la dinamica atmosferica mediante ecuaciones, mientras que los modelos de IA pueden capturar patrones aprendidos a partir de grandes volumenes de datos.
+Forecasting accumulated rainfall benefits from combining models with different strengths. Physics-based models represent atmospheric dynamics through numerical equations, while AI-based systems can capture learned patterns from large historical datasets.
 
-## Flujo de trabajo
+## Workflow
 
-1. Configurar fecha, corrida y ventana de acumulado.
-2. Descargar o localizar archivos GRIB por modelo.
-3. Cargar precipitacion acumulada desde cada fuente.
-4. Interpolar todos los campos a una rejilla comun.
-5. Aplicar factores de calibracion.
-6. Calcular el ensamble ponderado.
-7. Generar mapas regionales y comparaciones puntuales.
+1. Configure forecast date, cycle, and accumulation window.
+2. Download or locate GRIB files for each model.
+3. Load accumulated precipitation from every source.
+4. Interpolate all fields to a common grid.
+5. Apply model-level calibration factors.
+6. Compute the weighted multi-model blend.
+7. Generate regional maps and point comparisons.
 
-## Modelos incluidos
+## Included Models
 
-- GFS: modelo fisico global de NOAA.
-- ECMWF IFS: modelo fisico global de ECMWF.
-- GraphCast/GFS-IA: prediccion apoyada en IA disponible en buckets publicos.
-- ECMWF AIFS: sistema de prediccion con IA de ECMWF.
+- GFS: NOAA global physics-based forecast model.
+- ECMWF IFS: ECMWF global physics-based forecast model.
+- GraphCast-GFS: AI-based forecast output available from public NOAA buckets.
+- ECMWF AIFS: ECMWF AI-based forecast system.
 
-## Salidas esperadas
+## Expected Outputs
 
-- Dataset `xarray` con precipitacion multimodelo.
-- Mapas de acumulados de lluvia por region.
-- Comparacion puntual entre modelos para validacion rapida.
+- `xarray.DataArray` with blended accumulated precipitation.
+- Regional accumulated rainfall maps.
+- Point-level model comparisons for quick validation.

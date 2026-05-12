@@ -1,10 +1,24 @@
 [project]
-name = "lluvia-multimodelo-ai"
+name = "rainfall-multimodel-ai"
 version = "0.1.0"
-description = "Pronostico de lluvia acumulada con ensamble ponderado de modelos fisicos e IA."
+description = "Accumulated rainfall forecasting with a weighted blend of physical and AI weather models."
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [{ name = "Osmany Lorenzo Amaro" }]
+dependencies = [
+    "cartopy",
+    "cfgrib",
+    "eccodes",
+    "ecmwf-opendata",
+    "geopandas",
+    "matplotlib",
+    "numpy",
+    "pandas",
+    "s3fs",
+    "scipy",
+    "shapely",
+    "xarray",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

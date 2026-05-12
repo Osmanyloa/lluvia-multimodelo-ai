@@ -1,39 +1,36 @@
-# Lluvia Multimodelo AI
+# Hybrid Rainfall Multi-Model AI
 
-Proyecto de pronostico de precipitacion acumulada basado en un ensamble ponderado entre modelos meteorologicos fisicos y modelos con IA.
+Portfolio-ready Python project for accumulated rainfall forecasting with a weighted blend of physical numerical weather prediction models and AI-based forecast systems.
 
-El objetivo es combinar fuentes como GFS, ECMWF IFS, GraphCast/GFS-IA y ECMWF AIFS en una rejilla comun para producir acumulados de lluvia y mapas regionales listos para analisis meteorologico.
+The workflow combines sources such as GFS, ECMWF IFS, GraphCast-GFS, and ECMWF AIFS on a common grid to produce accumulated precipitation fields and regional maps for meteorological analysis.
 
-## Que incluye
+## Features
 
-- Descarga y lectura de salidas GRIB de modelos meteorologicos.
-- Configuracion de corrida, fecha y periodos de acumulado: `12h`, `24h`, `5d` o rangos tipo `f024-f144`.
-- Interpolacion a una rejilla comun.
-- Ensamble ponderado entre modelos fisicos e IA.
-- Factores de calibracion por modelo.
-- Mapas regionales para Caribe, Cuba, Centroamerica, La Espanola, Antillas Menores, Puerto Rico, Colombia/Venezuela, Estados Unidos, Florida, Texas, Mexico, Iberia y Canarias.
+- Downloads and reads GRIB output from multiple forecast systems.
+- Supports fixed accumulations (`12h`, `24h`, `5d`) and custom ranges such as `f024-f144`.
+- Interpolates every model to a shared grid.
+- Builds a calibrated weighted blend of physical and AI forecast models.
+- Includes regional precipitation map renderers for the Caribbean, Cuba, Central America, Hispaniola, the Lesser Antilles, Puerto Rico, Colombia/Venezuela, the United States, Florida, Texas, Mexico, Iberia, and the Canary Islands.
 
-## Estructura
+## Project Structure
 
 ```text
 lluvia-multimodelo-ai/
-├── src/lluvia_multimodelo/
-│   ├── core.py          # Clase principal MultiModeloMeteorologico
-│   ├── maps.py          # Funciones de mapas regionales
-│   └── geography.py     # Carga de shapefiles y capas geograficas
+├── src/rainfall_multimodel/
+│   ├── core.py          # Main RainfallMultiModel workflow
+│   ├── maps.py          # Regional map rendering functions
+│   └── geography.py     # Geographic layer helpers
 ├── examples/
-│   └── run_forecast.py  # Ejemplo reproducible de uso
-├── notebooks/
-│   └── modelos-2.ipynb  # Notebook original como referencia
-├── data/                # Datos locales ignorados por git
-├── outputs/             # Mapas y figuras generadas
+│   └── run_forecast.py  # Minimal usage example
+├── data/                # Local weather data ignored by git
+├── outputs/             # Generated maps and figures ignored by git
 ├── docs/
 │   └── project_overview.md
 ├── requirements.txt
 └── pyproject.toml
 ```
 
-## Instalacion
+## Installation
 
 ```bash
 python -m venv .venv
@@ -42,28 +39,33 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-> Nota: `cfgrib` requiere la libreria del sistema `eccodes`. En Linux suele instalarse con `apt-get install libeccodes-dev`; en macOS puede instalarse con `brew install eccodes`.
+> Note: `cfgrib` requires the system `eccodes` library. On Linux, install it with `apt-get install libeccodes-dev`; on macOS, install it with `brew install eccodes`.
 
-## Uso rapido
+## Quick Start
 
 ```python
-from lluvia_multimodelo import MultiModeloMeteorologico
+from rainfall_multimodel import RainfallMultiModel
 
-modelo = MultiModeloMeteorologico()
-modelo.configurar(fecha="20260511", corrida="06", acumulado="f024-f144")
-modelo.cargar_todos_los_modelos()
+model = RainfallMultiModel()
+model.configure(date="20260511", run="06", accumulation="f024-f144")
+model.load_all_models()
 
-ds_multi = modelo.crear_multimodelo(
-    pesos={"gfs": 0.25, "graphcast": 0.25, "ifs": 0.25, "aifs": 0.25}
+multi_model = model.create_multimodel(
+    weights={
+        "gfs": 0.25,
+        "ecmwf_ifs": 0.25,
+        "ecmwf_aifs": 0.25,
+        "gfs_graphcast": 0.25,
+    }
 )
 
-modelo.comparar_punto(lat=40.0, lon=-100.0)
+model.compare_point(latitude=40.0, longitude=-100.0)
 ```
 
-## Idea del modelo
+## Modeling Idea
 
-El multimodelo combina predictores fisicos tradicionales y predictores apoyados en IA. La filosofia inicial del proyecto es tratar ambos grupos con un peso balanceado y luego permitir calibracion segun desempeno historico, disponibilidad de datos y region.
+The multi-model blend combines traditional physics-based predictors with AI-based forecast systems. The initial philosophy is to balance both groups, then tune weights and calibration factors by region, data availability, and historical performance.
 
-## Autor
+## Author
 
 Osmany Lorenzo Amaro

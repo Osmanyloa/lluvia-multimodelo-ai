@@ -1,23 +1,23 @@
-"""Ejemplo minimo para descargar, combinar y consultar el multimodelo."""
+"""Minimal example for downloading, blending, and querying the multi-model."""
 
-from lluvia_multimodelo import MultiModeloMeteorologico
+from rainfall_multimodel import RainfallMultiModel
 
 
 def main():
-    modelo = MultiModeloMeteorologico()
-    modelo.configurar(fecha="20260511", corrida="06", acumulado="f024-f144")
-    modelo.cargar_todos_los_modelos()
+    model = RainfallMultiModel()
+    model.configure(date="20260511", run="06", accumulation="f024-f144")
+    model.load_all_models()
 
-    ds_multi = modelo.crear_multimodelo(
-        pesos={
+    multi_model = model.create_multimodel(
+        weights={
             "gfs": 0.25,
-            "graphcast": 0.25,
-            "ifs": 0.25,
-            "aifs": 0.25,
+            "ecmwf_ifs": 0.25,
+            "ecmwf_aifs": 0.25,
+            "gfs_graphcast": 0.25,
         }
     )
-    print(ds_multi)
-    modelo.comparar_punto(lat=40.0, lon=-100.0)
+    print(multi_model)
+    model.compare_point(latitude=40.0, longitude=-100.0)
 
 
 if __name__ == "__main__":

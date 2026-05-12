@@ -9,8 +9,4 @@ scipy
 matplotlib
 cartopy
 geopandas
-rasterio
-requests
-folium
 shapely
-ipython
