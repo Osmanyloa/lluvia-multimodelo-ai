@@ -1,0 +1,10 @@
+[project]
+name = "lluvia-multimodelo-ai"
+version = "0.1.0"
+description = "Pronostico de lluvia acumulada con ensamble ponderado de modelos fisicos e IA."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Osmany Lorenzo Amaro" }]
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,30 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.ipynb_checkpoints/
+
+# Datos meteorologicos grandes
+data/raw/**
+data/processed/**
+outputs/**
+*.grib
+*.grib2
+*.idx
+*.nc
+
+# Mantener carpetas versionadas
+!assets/
+!assets/.gitkeep
+!data/raw/
+!data/raw/.gitkeep
+!data/raw/shapefiles/
+!data/raw/shapefiles/.gitkeep
+!data/processed/
+!data/processed/.gitkeep
+!outputs/
+!outputs/maps/
+!outputs/maps/.gitkeep
+!outputs/figures/
+!outputs/figures/.gitkeep

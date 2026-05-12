@@ -1,0 +1,16 @@
+numpy
+pandas
+xarray
+cfgrib
+eccodes
+ecmwf-opendata
+s3fs
+scipy
+matplotlib
+cartopy
+geopandas
+rasterio
+requests
+folium
+shapely
+ipython
